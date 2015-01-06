@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8C559D07-C56A-476E-8736-ED266BBC061E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BFGameSDK</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B4E299C1D5C1424E166D8E0C3D0153BA00A294B2</key>
+		<string>https://github.com/zhaonana/CXGameSDK.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BFGameSDK.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B4E299C1D5C1424E166D8E0C3D0153BA00A294B2</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/zhaonana/CXGameSDK.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B4E299C1D5C1424E166D8E0C3D0153BA00A294B2</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B4E299C1D5C1424E166D8E0C3D0153BA00A294B2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BFGameSDK</string>
+		</dict>
+	</array>
+</dict>
+</plist>
