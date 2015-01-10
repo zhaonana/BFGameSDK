@@ -52,6 +52,8 @@
 {
     NSDictionary *dic = @{@"appID": _appID,
                           @"serviceID": _serverID,
+                          @"cpID": _cpID,
+                          @"gameID": _gameID
                           };
     NSMutableDictionary *infoDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     
@@ -135,7 +137,7 @@
     
     //set logoView
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(26, 15, 177, 37)];
-    [logoView setImage:[UIImage imageNamed:@"changxiangyouxi"]];
+    [logoView setImage:[UIImage imageNamed:@"baofeng"]];
     [self.view addSubview:logoView];
     
     _bodyView = [[UIView alloc] initWithFrame:KIPHONE_ALERT_FRAME];
@@ -148,7 +150,7 @@
         [vc.view removeFromSuperview];
     }
     
-    if ([Common getUser].nick_name.length) {
+    if ([Common getUser].username.length) {
         [vct.view removeFromSuperview];
         [_bodyView addSubview:userVct.view];
         _currentVct = userVct;
@@ -174,7 +176,7 @@
     
     //set logoView
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(26, 15, 228, 48)];
-    [logoView setImage:[UIImage imageNamed:@"padChangxiangyouxi"]];
+    [logoView setImage:[UIImage imageNamed:@"baofeng"]];
     [self.view addSubview:logoView];
     
     _bodyView = [[UIView alloc] initWithFrame:KIPAD_ALERT_FRAME];
@@ -186,7 +188,7 @@
     for (BaseViewController *vc in _actArray) {
         [vc.view removeFromSuperview];
     }
-    if ([Common getUser].nick_name.length) {
+    if ([Common getUser].username.length) {
         [vct.view removeFromSuperview];
         [_bodyView addSubview:userVct.view];
         _currentVct = userVct;

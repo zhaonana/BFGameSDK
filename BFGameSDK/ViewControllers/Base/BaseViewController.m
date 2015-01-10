@@ -37,7 +37,7 @@
     //判断是否已经存储
     if(userArray && [userArray count] > 0){
         for (UserModel *mUser in userArray) {
-            if([mUser.nick_name isEqualToString:user.nick_name]){
+            if([mUser.username isEqualToString:user.username]){
                 [userArray removeObject:mUser];
                 break;
             }

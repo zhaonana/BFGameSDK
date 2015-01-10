@@ -20,6 +20,14 @@
  */
 @property (nonatomic, copy) NSString *cpKey;
 /**
+ *  合作者ID
+ */
+@property (nonatomic, strong) NSString *cpId;
+/**
+ *  游戏ID
+ */
+@property (nonatomic, strong) NSString *gameId;
+/**
  *  服务器ID
  */
 @property (nonatomic, copy) NSString *serverId;

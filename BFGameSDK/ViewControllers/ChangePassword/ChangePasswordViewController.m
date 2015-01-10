@@ -302,6 +302,7 @@
     }
     
     NSDictionary *dic = @{@"user_id": [Common getUser].user_id,
+                          @"account": [Common getUser].username,
                           @"original_pwd": oldPassword,
                           @"new_pwd": newPassword
                           };

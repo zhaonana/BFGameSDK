@@ -202,7 +202,7 @@
 
     _username = [[NSUserDefaults standardUserDefaults] objectForKey:@"pUserName"];
     
-    NSDictionary *dic = @{@"username": _username,
+    NSDictionary *dic = @{@"account": _username,
                           };
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
     

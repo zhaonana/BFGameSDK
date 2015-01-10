@@ -171,8 +171,8 @@
     
     //set sinaBtn
     UIButton *sinaBtn = [[UIButton alloc] initWithFrame:CGRectMake(104, 205, 29, 28)];
-    [sinaBtn setImage:[UIImage imageNamed:@"CXweibo"] forState:UIControlStateNormal];
-    [sinaBtn setImage:[UIImage imageNamed:@"CXweibo"] forState:UIControlStateHighlighted];
+    [sinaBtn setImage:[UIImage imageNamed:@"bx_icon_baofeng"] forState:UIControlStateNormal];
+    [sinaBtn setImage:[UIImage imageNamed:@"bx_icon_baofeng"] forState:UIControlStateHighlighted];
     [sinaBtn addTarget:self action:@selector(sinaBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sinaBtn];
     
@@ -325,8 +325,8 @@
     
     //set sinaBtn
     UIButton *sinaBtn = [[UIButton alloc] initWithFrame:CGRectMake(130, 264, 31, 31)];
-    [sinaBtn setImage:[UIImage imageNamed:@"padWeibo"] forState:UIControlStateNormal];
-    [sinaBtn setImage:[UIImage imageNamed:@"padWeibo"] forState:UIControlStateHighlighted];
+    [sinaBtn setImage:[UIImage imageNamed:@"bx_icon_baofeng"] forState:UIControlStateNormal];
+    [sinaBtn setImage:[UIImage imageNamed:@"bx_icon_baofeng"] forState:UIControlStateHighlighted];
     [sinaBtn addTarget:self action:@selector(sinaBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sinaBtn];
     
@@ -410,7 +410,7 @@
         
         if(userArray && [userArray count] > 0){
             UserModel *lastUser = [userArray objectAtIndex:userArray.count - 1];
-            NSString *nick_name = lastUser.nick_name;
+            NSString *nick_name = lastUser.username;
             NSString *password = lastUser.password;
             if ([save isEqualToString:@"0"]) {
                 _accountField.text = nick_name;
@@ -494,7 +494,7 @@
     
     _dataArray = [[NSMutableArray alloc] initWithArray:_userArray];
     UserModel *user = [[UserModel alloc] init];
-    user.nick_name = @"其他用户";
+    user.username = @"其他用户";
     [_dataArray addObject:user];
 }
 
@@ -530,9 +530,9 @@
         userid = [Common getUser].user_id;
     }
     
-    NSDictionary *dic = @{@"username": username,
+    NSDictionary *dic = @{@"account": username,
                           @"password": password,
-                          @"origin": origin,
+//                          @"origin": origin,
                           @"user_id": userid
                           };
 
@@ -699,7 +699,7 @@
 - (void)resetView
 {
     if ([Common getUser]) {
-        _accountField.text = [Common getUser].nick_name;
+        _accountField.text = [Common getUser].username;
         _passWordField.text = [Common getUser].password;
     }
     
@@ -732,7 +732,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     UserModel *user = [_dataArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = user.nick_name;
+    cell.textLabel.text = user.username;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:200.0/255.0 alpha:1.0];
     return cell;
@@ -759,14 +759,14 @@
         
     }];
     UserModel *user = [_dataArray objectAtIndex:indexPath.row];
-    if ([user.nick_name isEqualToString:@"其他用户"]) {
+    if ([user.username isEqualToString:@"其他用户"]) {
         _accountField.text = @"";
         _passWordField.text = @"";
         _accountField.userInteractionEnabled = YES;
         _passWordField.userInteractionEnabled = YES;
         _passWordField.textColor = [UIColor whiteColor];
     } else {
-        _accountField.text = user.nick_name;
+        _accountField.text = user.username;
         _passWordField.text = user.password;
         _accountField.userInteractionEnabled = NO;
         _passWordField.userInteractionEnabled = NO;

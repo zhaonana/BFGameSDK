@@ -9,8 +9,7 @@
 #import "GGHTTPClient.h"
 #import "AFJSONRequestOperation.h"
 
-#define kBaseURL @"http://sdkapi.ak.cc"
-//#define kBaseURL @"http://sdkapi.test.ak.cc"
+#define kBaseURL @"http://sdk.gcenter.baofeng.com"
 //#define kBaseURL @"http://14.17.126.90:8091"
 
 @implementation GGHTTPClient

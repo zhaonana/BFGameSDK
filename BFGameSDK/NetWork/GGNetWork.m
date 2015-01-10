@@ -125,6 +125,8 @@ NSString* HMAC_SHA1SignatureForText(NSString *text, NSString *secret) {
     
     NSDictionary *dic = @{@"app_id": [infoDic objectForKey:@"appID"],
                           @"server_id": [infoDic objectForKey:@"serviceID"],
+                          @"cp_id": [infoDic objectForKey:@"cpID"],
+                          @"game_id": [infoDic objectForKey:@"gameID"],
                           @"os_version": phoneVer,
                           @"system": @"ios",
                           @"imei": [DeviceInfo getIDFA],

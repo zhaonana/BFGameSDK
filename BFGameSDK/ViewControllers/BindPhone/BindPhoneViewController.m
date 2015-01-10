@@ -281,7 +281,8 @@
     }
     
     NSDictionary *dic = @{@"user_id": [Common getUser].user_id,
-                         @"phone": _phoneNumber
+                          @"account": [Common getUser].username,
+                         @"phone_number": _phoneNumber
                          };
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
@@ -362,8 +363,9 @@
         return;
     }
     NSDictionary *dic = @{@"user_id": [Common getUser].user_id,
+                          @"account": [Common getUser].username,
                           @"code": _codeNumber,
-                          @"phone": _phoneNumber
+                          @"phone_number": _phoneNumber
                           };
 
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];

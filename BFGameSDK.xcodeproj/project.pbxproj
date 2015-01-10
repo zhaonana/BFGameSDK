@@ -145,6 +145,8 @@
 		39B6BB9519F9145E00394492 /* CXxiala@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B6BB9319F9145E00394492 /* CXxiala@2x.png */; };
 		39B6BB9819F914F200394492 /* padXiala.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B6BB9619F914F200394492 /* padXiala.png */; };
 		39B6BB9919F914F200394492 /* padXiala@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B6BB9719F914F200394492 /* padXiala@2x.png */; };
+		39DBFA7D1A5BF10300F75976 /* baofeng.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DBFA7C1A5BF10300F75976 /* baofeng.png */; };
+		39DBFA7F1A5BF14000F75976 /* bx_icon_baofeng.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DBFA7E1A5BF14000F75976 /* bx_icon_baofeng.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,6 +352,8 @@
 		39B6BB9319F9145E00394492 /* CXxiala@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CXxiala@2x.png"; sourceTree = "<group>"; };
 		39B6BB9619F914F200394492 /* padXiala.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = padXiala.png; sourceTree = "<group>"; };
 		39B6BB9719F914F200394492 /* padXiala@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "padXiala@2x.png"; sourceTree = "<group>"; };
+		39DBFA7C1A5BF10300F75976 /* baofeng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baofeng.png; sourceTree = "<group>"; };
+		39DBFA7E1A5BF14000F75976 /* bx_icon_baofeng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bx_icon_baofeng.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -450,6 +454,8 @@
 			children = (
 				395F410619EE18800002AB2D /* AppDelegate.h */,
 				395F410719EE18800002AB2D /* AppDelegate.m */,
+				39DBFA7C1A5BF10300F75976 /* baofeng.png */,
+				39DBFA7E1A5BF14000F75976 /* bx_icon_baofeng.png */,
 				3955F5D21A0126880035DAFA /* a.appcpa.net */,
 				395F41A019EE1B1D0002AB2D /* ViewControllers */,
 				395F41CC19EE1CF90002AB2D /* Images */,
@@ -881,6 +887,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39DBFA7F1A5BF14000F75976 /* bx_icon_baofeng.png in Resources */,
 				3997A54319F1084E0073D6F2 /* padZhucedianji.png in Resources */,
 				3997A53019F1084E0073D6F2 /* padDianhua@2x.png in Resources */,
 				395F41F819EE1CF90002AB2D /* CXqiehuanzhanghao.png in Resources */,
@@ -909,6 +916,7 @@
 				3998E8A21A03A3F900A0B090 /* padQqhui@2x.png in Resources */,
 				3998E89D1A03A36200A0B090 /* CXqqhui.png in Resources */,
 				395F41F519EE1CF90002AB2D /* CXfenggexian@2x.png in Resources */,
+				39DBFA7D1A5BF10300F75976 /* baofeng.png in Resources */,
 				395F410219EE18800002AB2D /* InfoPlist.strings in Resources */,
 				39621A9019EF7A4E00F5F18E /* CXfanhui.png in Resources */,
 				395F41F419EE1CF90002AB2D /* CXfengexian.png in Resources */,

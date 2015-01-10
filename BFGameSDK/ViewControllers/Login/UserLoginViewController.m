@@ -246,9 +246,9 @@
     NSString *origin = [Common getUser].origin;
     NSString *userid = [Common getUser].user_id;
     
-    NSDictionary *dic = @{@"username": username,
+    NSDictionary *dic = @{@"account": username,
                           @"password": password,
-                          @"origin": origin,
+//                          @"origin": origin,
                           @"user_id": userid
                           };
     
@@ -304,7 +304,7 @@
     [self initSaveUser];
     
     if ([Common getUser]) {
-        _accountField.text = [Common getUser].nick_name;
+        _accountField.text = [Common getUser].username;
     }
     
     //set _bindPhoneBtn and changePassWordBtn state
@@ -323,7 +323,7 @@
         _userArray = [JsonUtil parseUserModelArrayStr:[self parseJsonData:data]];
         if(_userArray && [_userArray count] > 0){
             [Common setUser:[_userArray objectAtIndex:_userArray.count - 1]];
-            _accountField.text = [Common getUser].nick_name;
+            _accountField.text = [Common getUser].username;
             if (![Common isBindPhone]) {
                 NSLog(@"用户填写手机号码，与当前账号进行绑定，用于密码找回~");
                 [self isBindPhone];
@@ -337,7 +337,9 @@
 
 - (void)isBindPhone
 {
-    NSDictionary *dic = @{@"user_id": [Common getUser].user_id};
+    NSDictionary *dic = @{@"user_id": [Common getUser].user_id,
+                          @"account": [Common getUser].username
+                          };
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
     
     [GGNetWork getHttp:@"user/isbindmobile" parameters:params sucess:^(id responseObj) {

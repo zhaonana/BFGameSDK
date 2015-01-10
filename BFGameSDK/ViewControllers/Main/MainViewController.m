@@ -46,6 +46,9 @@
     CXInitConfigure *cfg = [[CXInitConfigure alloc] init];
     cfg.appId = @"10003";
     cfg.cpKey = @"123456";
+    
+    cfg.cpId = @"100010";
+    cfg.gameId = @"25";
     cfg.serverId = @"2";
     cfg.controller = self;
     [[CXComPlatformBase defaultPlatform] CXInit:cfg];

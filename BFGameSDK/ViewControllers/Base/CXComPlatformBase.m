@@ -25,6 +25,9 @@ static CXComPlatformBase *sharedSingleton = nil;
     CXSDKViewController *cxVC = [[CXSDKViewController alloc] init];
     [cxVC setAppID:configure.appId];
     [cxVC setCpKey:configure.cpKey];
+    
+    [cxVC setCpID:configure.cpId];
+    [cxVC setGameID:configure.gameId];
     [cxVC setServerID:configure.serverId];
     [cxVC initSDK:configure.controller];
 }

@@ -296,7 +296,7 @@
         return;
     }
     
-    NSDictionary *dic = @{@"username": username,
+    NSDictionary *dic = @{@"account": username,
                           @"password": password,
                           @"isGuset": @"0"
                           };
