@@ -9,12 +9,14 @@
 #import "UserLoginViewController.h"
 #import "PreferencesUtils.h"
 #import "TalkingDataAppCpa.h"
+#import "CommonHelp.h"
 
 @interface UserLoginViewController () {
     UITextField    *_accountField;
     NSMutableArray *_userArray;
     UIButton       *_bindPhoneBtn;
     UIButton       *_changeBtn;
+    BOOL           _isBindPhone;
 }
 
 @end
@@ -34,13 +36,11 @@
 {
     [super viewDidLoad];
     
-    [Common setBindPhone:NO];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [self setUpSubViews];
     } else {
         [self setUpPadSubViews];
     }
-//    [self initSaveUser];
 }
 
 - (void)didReceiveMemoryWarning
@@ -196,7 +196,7 @@
 
 - (void)setUpBtnState
 {
-    if ([[Common getUser].origin integerValue] == 1 || [[Common getUser].origin integerValue] == 2) {
+    if ([CommonHelp getUser].token.length) {
         [_bindPhoneBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [_bindPhoneBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
         _bindPhoneBtn.userInteractionEnabled = NO;
@@ -221,11 +221,7 @@
  */
 - (void)bindPhoneBtnClick
 {
-    if ([Common isBindPhone]) {
-        [SVProgressHUD showErrorWithStatus:@"该账号已绑定手机号"];
-    } else {
-        [self.rootView showTabByTag:TYPE_BIND_PHONE];
-    }
+    [self isBindPhone];
 }
 
 /**
@@ -241,53 +237,69 @@
  */
 - (void)beginBtnClick
 {
-    NSString *username = [Common getUser].username;
-    NSString *password = [Common getUser].password;
-    NSString *origin = [Common getUser].origin;
-    NSString *userid = [Common getUser].user_id;
-    
-    NSDictionary *dic = @{@"account": username,
-                          @"password": password,
-//                          @"origin": origin,
-                          @"user_id": userid
-                          };
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
-    
-    [GGNetWork getHttp:@"user/login" parameters:params sucess:^(id responseObj) {
-        if (responseObj) {
-            NSInteger code = [[responseObj objectForKey:@"code"] intValue];
-            if(code == 1){
-                //发送回调
-                NSDictionary *dic = [responseObj objectForKey:@"data"];
-                UserModel *user = [JsonUtil parseUserModel:dic];
-                user.username = username;
-                user.password = password;
-                user.origin = origin;
-
-                //保存账户密码
-                [self saveUsers:user];
-                //设置当前用户信息
-                [Common setUser:user];
-                
-                if ([[Common getUser].origin integerValue] == 3 && ![Common isBindPhone]) {
-                    [self.rootView showTabByTag:TYPE_ISBIND_PHONE];
-                } else {
+    if ([CommonHelp getUser].token.length) {
+        NSDictionary *dic = @{@"token": [CommonHelp getUser].token};
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
+        [GGNetWork getHttp:@"user/loginbytoken" parameters:params sucess:^(id responseObj) {
+            if (responseObj) {
+                NSInteger code = [[responseObj objectForKey:@"code"] intValue];
+                if(code == 1){
+                    NSDictionary *dic = [responseObj objectForKey:@"data"];
+                    UserModel *user = [CommonHelp parseUserModel:dic];
+                    user.token = [CommonHelp getUser].token;
+                    [CommonHelp saveUser:user];
                     [self.rootView closeSDK];
+                    //TD
+                    [TalkingDataAppCpa onLogin:user.user_id];
+                } else {
+                    NSDictionary *dic = @{@"code": [NSString stringWithFormat:@"%ld",(long)code]};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil userInfo:dic];
+                    [self showToast:code];
                 }
-                
-                //TD
-                [TalkingDataAppCpa onLogin:user.user_id];
-            } else {
-                NSDictionary *dic = @{@"code": [NSString stringWithFormat:@"%ld",(long)code]};
-                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil userInfo:dic];
-
-                [self showToast:code];
             }
-        }
-    } failed:^(NSString *errorMsg) {
-        [SVProgressHUD showErrorWithStatus:@"链接失败"];
-    }];
+        } failed:^(NSString *errorMsg) {
+            [SVProgressHUD showErrorWithStatus:@"链接失败"];
+        }];
+    } else {
+        NSString *username = [CommonHelp getUser].username;
+        NSString *password = [CommonHelp getUser].password;
+        NSString *userid = [CommonHelp getUser].user_id;
+        
+        NSDictionary *dic = @{@"account": username,
+                              @"password": password,
+                              @"user_id": userid
+                              };
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
+        
+        [GGNetWork getHttp:@"user/login" parameters:params sucess:^(id responseObj) {
+            if (responseObj) {
+                NSInteger code = [[responseObj objectForKey:@"code"] intValue];
+                if(code == 1){
+                    //发送回调
+                    NSDictionary *dic = [responseObj objectForKey:@"data"];
+                    UserModel *user = [CommonHelp parseUserModel:dic];
+                    user.username = username;
+                    user.password = password;
+                    
+                    [CommonHelp saveUser:user];
+                    
+                    [self.rootView closeSDK];
+                    
+                    //TD
+                    [TalkingDataAppCpa onLogin:user.user_id];
+                } else {
+                    NSDictionary *dic = @{@"code": [NSString stringWithFormat:@"%ld",(long)code]};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil userInfo:dic];
+                    
+                    [self showToast:code];
+                }
+            }
+        } failed:^(NSString *errorMsg) {
+            [SVProgressHUD showErrorWithStatus:@"链接失败"];
+        }];
+    }
 }
 
 /**
@@ -301,44 +313,18 @@
 #pragma mark - resetView
 - (void)resetView
 {
-    [self initSaveUser];
-    
-    if ([Common getUser]) {
-        _accountField.text = [Common getUser].username;
+    if ([CommonHelp getUser]) {
+        _accountField.text = [CommonHelp getUser].username;
     }
     
     //set _bindPhoneBtn and changePassWordBtn state
     [self setUpBtnState];
 }
 
-/*
- * 初始化保存的账户
- */
-- (void)initSaveUser
-{
-    BOOL isUser = NO;
-    NSString *json = [PreferencesUtils getStringForKey:kUserNames];
-    if([StringUtil isNotEmpty:json]){
-        NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-        _userArray = [JsonUtil parseUserModelArrayStr:[self parseJsonData:data]];
-        if(_userArray && [_userArray count] > 0){
-            [Common setUser:[_userArray objectAtIndex:_userArray.count - 1]];
-            _accountField.text = [Common getUser].username;
-            if (![Common isBindPhone]) {
-                NSLog(@"用户填写手机号码，与当前账号进行绑定，用于密码找回~");
-                [self isBindPhone];
-            } else {
-                NSLog(@"该账号已绑定手机号~");
-            }
-            isUser = YES;
-        }
-    }
-}
-
 - (void)isBindPhone
 {
-    NSDictionary *dic = @{@"user_id": [Common getUser].user_id,
-                          @"account": [Common getUser].username
+    NSDictionary *dic = @{@"user_id": [CommonHelp getUser].user_id,
+                          @"account": [CommonHelp getUser].username
                           };
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
     
@@ -347,11 +333,9 @@
             NSInteger code = [[responseObj objectForKey:@"code"] intValue];
             if(code == 1){
                 //发送回调
-                NSLog(@"该账号已绑定手机号~");
-                [Common setBindPhone:YES];
+                [SVProgressHUD showErrorWithStatus:@"该账号已绑定手机号"];
             } else {
-                NSLog(@"用户填写手机号码，与当前账号进行绑定，用于密码找回~");
-                [Common setBindPhone:NO];
+                [self.rootView showTabByTag:TYPE_BIND_PHONE];
             }
         }
     } failed:^(NSString *errorMsg) {

@@ -8,6 +8,7 @@
 
 #import "RegistViewController.h"
 #import "TalkingDataAppCpa.h"
+#import "CommonHelp.h"
 
 @interface RegistViewController () {
     UITextField *_accountField;
@@ -309,14 +310,11 @@
             if(code == 1){
                 //发送回调
                 NSDictionary *dic = [responseObj objectForKey:@"data"];
-                UserModel *user = [JsonUtil parseUserModel:dic];
+                UserModel *user = [CommonHelp parseUserModel:dic];
                 user.username = username;
                 user.password = password;
-                
-                //保存账户密码
-                [self saveUsers:user];
-                //设置当前用户信息
-                [Common setUser:user];
+                [CommonHelp saveUser:user];
+    
                 [self.rootView showTabByTag:TYPE_ISBIND_PHONE];
                 //TD
                 [TalkingDataAppCpa onRegister:user.user_id];

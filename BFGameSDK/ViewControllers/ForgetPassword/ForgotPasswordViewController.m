@@ -211,7 +211,10 @@
             NSInteger code = [[responseObj objectForKey:@"code"] intValue];
             if(code == 1){
                 [_isBindPhoneLab setHidden:YES];
+                NSDictionary *dataDic = [responseObj objectForKey:@"data"];
+                NSString *phone_number = [dataDic objectForKey:@"phone_number"];
                 [[NSUserDefaults standardUserDefaults] setObject:_username forKey:@"pUserName"];
+                [[NSUserDefaults standardUserDefaults] setObject:phone_number forKey:@"pPhoneNumber"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 [self.rootView showTabByTag:TYPE_RESET_PASSWORD];

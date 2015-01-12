@@ -11,8 +11,7 @@
 #import "StringUtil.h"
 #import "GGNetWork.h"
 #import "PreferencesUtils.h"
-#import "Common.h"
-#import "JsonUtil.h"
+#import "CommonHelp.h"
 #import "PreferencesUtils.h"
 
 @interface BindPhoneViewController () {
@@ -45,14 +44,6 @@
         [self setUpSubViews];
     } else {
         [self setUpPadSubViews];
-    }
-    NSString *json = [PreferencesUtils getStringForKey:kUserNames];
-    if ([StringUtil isNotEmpty:json]) {
-        NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-        NSArray *_userArray = [JsonUtil parseUserModelArrayStr:[self parseJsonData:data]];
-        if(_userArray && _userArray.count > 0){
-            [Common setUser:[_userArray objectAtIndex:_userArray.count - 1]];
-        }
     }
 }
 
@@ -280,8 +271,8 @@
         return;
     }
     
-    NSDictionary *dic = @{@"user_id": [Common getUser].user_id,
-                          @"account": [Common getUser].username,
+    NSDictionary *dic = @{@"user_id": [CommonHelp getUser].user_id,
+                          @"account": [CommonHelp getUser].username,
                          @"phone_number": _phoneNumber
                          };
     
@@ -362,8 +353,8 @@
         [SVProgressHUD showErrorWithStatus:@"验证码不能为空"];
         return;
     }
-    NSDictionary *dic = @{@"user_id": [Common getUser].user_id,
-                          @"account": [Common getUser].username,
+    NSDictionary *dic = @{@"user_id": [CommonHelp getUser].user_id,
+                          @"account": [CommonHelp getUser].username,
                           @"code": _codeNumber,
                           @"phone_number": _phoneNumber
                           };
@@ -376,7 +367,6 @@
             if (code == 1) {
                 //发送回调
                 [SVProgressHUD showSuccessWithStatus:@"绑定成功"];
-                [Common setBindPhone:YES];
                 [self.rootView showTabByTag:TYPE_USER_LOGIN];
             } else {
                 [self showToast:code];
@@ -395,15 +385,6 @@
     
     [_phoneField resignFirstResponder];
     [_codeField resignFirstResponder];
-    
-    NSString *json = [PreferencesUtils getStringForKey:kUserNames];
-    if ([StringUtil isNotEmpty:json]) {
-        NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-        NSArray *_userArray = [JsonUtil parseUserModelArrayStr:[self parseJsonData:data]];
-        if(_userArray && _userArray.count > 0){
-            [Common setUser:[_userArray objectAtIndex:_userArray.count - 1]];
-        }
-    }
 }
 
 

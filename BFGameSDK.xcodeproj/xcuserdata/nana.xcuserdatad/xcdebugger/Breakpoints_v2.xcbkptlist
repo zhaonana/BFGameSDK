@@ -169,38 +169,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BFGameSDK/Common/EBPurchase/EBPurchaseHelper.m"
-            timestampString = "438064436.43479"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "-failedRestore:error:message:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BFGameSDK/Common/EBPurchase/EBPurchaseHelper.m"
-            timestampString = "438064436.43479"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
-            landmarkName = "-incompleteRestore:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CXGameSDK/ViewControllers/Pay/PayViewController.m"
             timestampString = "437045533.319358"
             startingColumnNumber = "9223372036854775807"
@@ -334,38 +302,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BFGameSDK/Common/EBPurchase/EBPurchaseHelper.m"
-            timestampString = "437574975.423132"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "-purchaseProduct"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BFGameSDK/Common/EBPurchase/EBPurchaseHelper.m"
-            timestampString = "437574975.423132"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "-requestedProduct:identifier:name:price:description:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -401,13 +337,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BFGameSDK/Common/EBPurchase/EBPurchaseHelper.m"
-            timestampString = "437574975.423132"
+            filePath = "BFGameSDK/Common/EBPurchase/EBPurchase.m"
+            timestampString = "437910791.334815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "-restorePurchase"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "-paymentQueueRestoreCompletedTransactionsFinished:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -417,13 +353,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BFGameSDK/Common/EBPurchase/EBPurchase.m"
-            timestampString = "437910791.334815"
+            filePath = "BFGameSDK/Common/EBPurchase/EBPurchaseHelper.m"
+            timestampString = "442737338.830373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "-paymentQueueRestoreCompletedTransactionsFinished:"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "-requestOrdersWithParams:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

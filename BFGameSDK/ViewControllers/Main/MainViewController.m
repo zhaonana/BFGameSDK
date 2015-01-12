@@ -47,7 +47,7 @@
     cfg.appId = @"10003";
     cfg.cpKey = @"123456";
     
-    cfg.cpId = @"100010";
+    cfg.cpId = @"10010";
     cfg.gameId = @"25";
     cfg.serverId = @"2";
     cfg.controller = self;
@@ -64,7 +64,6 @@
     NSString *ticket = [notification.userInfo objectForKey:@"ticket"];
     NSString *result = [NSString stringWithFormat:@"登录成功 userID=%@, ticket=%@", userID, ticket];
     [SVProgressHUD showSuccessWithStatus:result];
-    NSLog(@"%@",result);
 }
 
 - (void)loginFailedCallBack:(NSNotification *)notification
@@ -72,7 +71,6 @@
     NSString *resultCode = [notification.userInfo objectForKey:@"code"];
     NSString *result = [NSString stringWithFormat:@"登录失败 resultCode=%@", resultCode];
     [SVProgressHUD showErrorWithStatus:result];
-    NSLog(@"%@",result);
 }
 
 #pragma mark - 开始支付
@@ -96,7 +94,6 @@
     NSString *productId = [notification.userInfo objectForKey:@"productId"];
     NSString *result = [NSString stringWithFormat:@"Your purchase was successful and the Game Levels Pack %@ is now unlocked for your enjoyment!", productId];
     [SVProgressHUD showSuccessWithStatus:result];
-    NSLog(@"%@",result);
 }
 
 - (void)purchaseFailedCallBack:(NSNotification *)notification
@@ -105,7 +102,6 @@
     NSString *errorMessage = [notification.userInfo objectForKey:@"errorMessage"];
     NSString *result = [NSString stringWithFormat:@"Apple reported a transaction error.Please try again later, or contact the app's customer support for assistance.resultCode=%@, errorMessage=%@", resultCode, errorMessage];
     [SVProgressHUD showErrorWithStatus:result];
-    NSLog(@"%@",result);
 }
 
 - (void)purchaseCancelledCallBack:(NSNotification *)notification
@@ -113,7 +109,6 @@
     NSString *errorMessage = [notification.userInfo objectForKey:@"errorMessage"];
     NSString *result = [NSString stringWithFormat:@"You cancelled the request.Please try again later, or contact the app's customer support for assistance.errorMessage=%@", errorMessage];
     [SVProgressHUD showErrorWithStatus:result];
-    NSLog(@"%@",result);
 }
 
 @end

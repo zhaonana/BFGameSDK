@@ -12,6 +12,7 @@
 #import "CXSDKViewController.h"
 #import "OtherLoginViewController.h"
 #import "TalkingDataAppCpa.h"
+#import "CommonHelp.h"
 
 @interface LoginViewController () <UITableViewDataSource, UITableViewDelegate> {
     UITextField    *_accountField;
@@ -21,6 +22,7 @@
     UIButton       *_forgotBtn;
     UILabel        *_forgetLab;
     NSMutableArray *_dataArray;
+    UserModel      *_userModel;
 }
 
 @end
@@ -45,7 +47,6 @@
     } else {
         [self setUpPadSubViews];
     }
-    [self initView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -130,37 +131,25 @@
     UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(26, 130, 84, 27)];
     [loginBtn setBackgroundImage:[UIImage imageNamed:@"CXdengluyouxi"] forState:UIControlStateNormal];
     [loginBtn setBackgroundImage:[UIImage imageNamed:@"CXdengluyouxi"] forState:UIControlStateHighlighted];
-    [loginBtn setTitle:@"登录游戏" forState:UIControlStateNormal];
-    [loginBtn setTitle:@"登录游戏" forState:UIControlStateHighlighted];
+    [loginBtn setTitle:@"1秒注册" forState:UIControlStateNormal];
+    [loginBtn setTitle:@"1秒注册" forState:UIControlStateHighlighted];
     [loginBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     [loginBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateHighlighted];
     [loginBtn.titleLabel setFont:[UIFont systemFontOfSize:13.0]];
-    [loginBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [loginBtn addTarget:self action:@selector(registBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginBtn];
     
     //set touristsBtn
     UIButton *touristsBtn = [[UIButton alloc] initWithFrame:CGRectMake(119, 130, 84, 27)];
     [touristsBtn setBackgroundImage:[UIImage imageNamed:@"CXyoukedenglu"] forState:UIControlStateNormal];
     [touristsBtn setBackgroundImage:[UIImage imageNamed:@"CXyoukedenglu"] forState:UIControlStateHighlighted];
-    [touristsBtn setTitle:@"游客登录" forState:UIControlStateNormal];
-    [touristsBtn setTitle:@"游客登录" forState:UIControlStateHighlighted];
+    [touristsBtn setTitle:@"登录" forState:UIControlStateNormal];
+    [touristsBtn setTitle:@"登录" forState:UIControlStateHighlighted];
     [touristsBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     [touristsBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateHighlighted];
     [touristsBtn.titleLabel setFont:[UIFont systemFontOfSize:13.0]];
-    [touristsBtn addTarget:self action:@selector(touristsBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [touristsBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:touristsBtn];
-    
-    //set registBtn
-    UIButton *registBtn = [[UIButton alloc] initWithFrame:CGRectMake(26, 163, 177, 27)];
-    [registBtn setBackgroundImage:[UIImage imageNamed:@"CXzhuce"] forState:UIControlStateNormal];
-    [registBtn setBackgroundImage:[UIImage imageNamed:@"CXzhuce"] forState:UIControlStateHighlighted];
-    [registBtn setTitle:@"注册" forState:UIControlStateNormal];
-    [registBtn setTitle:@"注册" forState:UIControlStateHighlighted];
-    [registBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [registBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateHighlighted];
-    [registBtn.titleLabel setFont:[UIFont systemFontOfSize:13.0]];
-    [registBtn addTarget:self action:@selector(registBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:registBtn];
     
     //set otherLoginLab
     UILabel *otherLab = [[UILabel alloc] initWithFrame:CGRectMake(38, 213, 63, 13)];
@@ -176,18 +165,6 @@
     [sinaBtn addTarget:self action:@selector(sinaBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sinaBtn];
     
-    //set tencentBtn
-//    UIButton *tencentBtn = [[UIButton alloc] initWithFrame:CGRectMake(143, 205, 29, 28)];
-//    if ([QQApi isQQInstalled]) {
-//        [tencentBtn setImage:[UIImage imageNamed:@"CXqq"] forState:UIControlStateNormal];
-//        [tencentBtn setImage:[UIImage imageNamed:@"CXqq"] forState:UIControlStateHighlighted];
-//    } else {
-//        [tencentBtn setImage:[UIImage imageNamed:@"CXqqhui"] forState:UIControlStateNormal];
-//        [tencentBtn setImage:[UIImage imageNamed:@"CXqqhui"] forState:UIControlStateHighlighted];
-//    }
-//    [tencentBtn addTarget:self action:@selector(tencentBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    //[self.view addSubview:tencentBtn];
-    
     //set forgotPassWordBtn
     _forgotBtn = [[UIButton alloc] initWithFrame:CGRectMake(144, 246, 64, 13)];
     [_forgotBtn setTitle:@"忘记密码?" forState:UIControlStateNormal];
@@ -201,7 +178,7 @@
     [self.view addSubview:_forgetLab];
     
     //set forgotPassWordBtn and forgetLab state
-    [self setUpForgotPasswordBtnWithOrigin:[Common getUser].origin];
+    [self setUpForgotPasswordBtnWithToken:[CommonHelp getUser].token];
     
     //set switchTableView
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(26, 85, 177, 0) style:UITableViewStylePlain];
@@ -284,37 +261,25 @@
     UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(29, 162, 107, 35)];
     [loginBtn setBackgroundImage:[UIImage imageNamed:@"padDengluyouxi"] forState:UIControlStateNormal];
     [loginBtn setBackgroundImage:[UIImage imageNamed:@"padDengluyouxi"] forState:UIControlStateHighlighted];
-    [loginBtn setTitle:@"登录游戏" forState:UIControlStateNormal];
-    [loginBtn setTitle:@"登录游戏" forState:UIControlStateHighlighted];
+    [loginBtn setTitle:@"1秒注册" forState:UIControlStateNormal];
+    [loginBtn setTitle:@"1秒注册" forState:UIControlStateHighlighted];
     [loginBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     [loginBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateHighlighted];
     [loginBtn.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
-    [loginBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [loginBtn addTarget:self action:@selector(registBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginBtn];
     
     //set touristsBtn
     UIButton *touristsBtn = [[UIButton alloc] initWithFrame:CGRectMake(149, 162, 107, 35)];
     [touristsBtn setBackgroundImage:[UIImage imageNamed:@"padYouikedenglu"] forState:UIControlStateNormal];
     [touristsBtn setBackgroundImage:[UIImage imageNamed:@"padYouikedenglu"] forState:UIControlStateHighlighted];
-    [touristsBtn setTitle:@"游客登录" forState:UIControlStateNormal];
-    [touristsBtn setTitle:@"游客登录" forState:UIControlStateHighlighted];
+    [touristsBtn setTitle:@"登录" forState:UIControlStateNormal];
+    [touristsBtn setTitle:@"登录" forState:UIControlStateHighlighted];
     [touristsBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     [touristsBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateHighlighted];
     [touristsBtn.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
-    [touristsBtn addTarget:self action:@selector(touristsBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [touristsBtn addTarget:self action:@selector(loginBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:touristsBtn];
-    
-    //set registBtn
-    UIButton *registBtn = [[UIButton alloc] initWithFrame:CGRectMake(29, 206, 228, 35)];
-    [registBtn setBackgroundImage:[UIImage imageNamed:@"padZhuce"] forState:UIControlStateNormal];
-    [registBtn setBackgroundImage:[UIImage imageNamed:@"padZhuce"] forState:UIControlStateHighlighted];
-    [registBtn setTitle:@"注册" forState:UIControlStateNormal];
-    [registBtn setTitle:@"注册" forState:UIControlStateHighlighted];
-    [registBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [registBtn setTitleColor:[UIColor colorWithRed:33.0/255.0 green:39.0/255.0 blue:66.0/255.0 alpha:1.0] forState:UIControlStateHighlighted];
-    [registBtn.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
-    [registBtn addTarget:self action:@selector(registBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:registBtn];
     
     //set otherLoginLab
     UILabel *otherLab = [[UILabel alloc] initWithFrame:CGRectMake(54, 270, 70, 16)];
@@ -330,18 +295,6 @@
     [sinaBtn addTarget:self action:@selector(sinaBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sinaBtn];
     
-    //set tencentBtn
-//    UIButton *tencentBtn = [[UIButton alloc] initWithFrame:CGRectMake(174, 264, 31, 31)];
-//    if ([QQApi isQQInstalled]) {
-//        [tencentBtn setImage:[UIImage imageNamed:@"padQq"] forState:UIControlStateNormal];
-//        [tencentBtn setImage:[UIImage imageNamed:@"padQq"] forState:UIControlStateHighlighted];
-//    } else {
-//        [tencentBtn setImage:[UIImage imageNamed:@"padQqhui"] forState:UIControlStateNormal];
-//        [tencentBtn setImage:[UIImage imageNamed:@"padQqhui"] forState:UIControlStateHighlighted];
-//    }
-//    [tencentBtn addTarget:self action:@selector(tencentBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    //[self.view addSubview:tencentBtn];
-    
     //set forgotPassWordBtn
     _forgotBtn = [[UIButton alloc] initWithFrame:CGRectMake(178, 310, 74, 16)];
     [_forgotBtn setTitle:@"忘记密码?" forState:UIControlStateNormal];
@@ -356,7 +309,7 @@
     [self.view addSubview:_forgetLab];
     
     //set forgotPassWordBtn and forgetLab state
-    [self setUpForgotPasswordBtnWithOrigin:[Common getUser].origin];
+    [self setUpForgotPasswordBtnWithToken:[CommonHelp getUser].token];
 
     //set switchTableView
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(29, 105, 228, 0) style:UITableViewStylePlain];
@@ -366,9 +319,9 @@
     [self.view addSubview:_tableView];
 }
 
-- (void)setUpForgotPasswordBtnWithOrigin:(NSString *)origin
+- (void)setUpForgotPasswordBtnWithToken:(NSString *)token
 {
-    if ([origin integerValue] == 1 || [origin integerValue] == 2) {
+    if (token.length) {
         [_forgotBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [_forgotBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
         _forgotBtn.userInteractionEnabled = NO;
@@ -396,31 +349,6 @@
     }
 }
 
-- (void)initView
-{
-    NSString *save = [PreferencesUtils getStringForKey:kSaveUser];
-    if ([StringUtil isEmpty:save]) {
-        save = @"1";
-    }
-    
-    NSString *json = [PreferencesUtils getStringForKey:kUserNames];
-    if([StringUtil isNotEmpty:json]){
-        NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-        NSMutableArray *userArray = [JsonUtil parseUserModelArrayStr:[self parseJsonData:data]];
-        
-        if(userArray && [userArray count] > 0){
-            UserModel *lastUser = [userArray objectAtIndex:userArray.count - 1];
-            NSString *nick_name = lastUser.username;
-            NSString *password = lastUser.password;
-            if ([save isEqualToString:@"0"]) {
-                _accountField.text = nick_name;
-                _passWordField.text = password;
-            }
-            
-            [Common setUser:lastUser];
-        }
-    }
-}
 
 /**
  *  设置下拉菜单显示
@@ -471,12 +399,7 @@
 {
     [self setKeyBoardHidden];
     
-    NSString *json = [PreferencesUtils getStringForKey:kUserNames];
-    if ([StringUtil isEmpty:json]) {
-        json = @"";
-    }
-    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-    _userArray = [JsonUtil parseUserModelArrayStr:[self parseJsonData:data]];
+    _userArray = [CommonHelp getUserArray];
     if (_userArray && _userArray.count > 0) {
         [UIView animateWithDuration:0.3 animations:^{
             if (_tableView.bounds.size.height == 0) {
@@ -507,71 +430,81 @@
     
     [self setKeyBoardHidden];
     
-    NSString *username = [Common getUser].username;
-    NSString *password = [Common getUser].password;
-    NSString *origin = [Common getUser].origin;
-    NSString *userid = nil;
-    
-    if (_accountField.userInteractionEnabled == YES) {
-        if([StringUtil isEmpty:_accountField.text]) {
-            [SVProgressHUD showErrorWithStatus:@"用户名不能为空"];
-            return;
+    if (_userModel.token.length) {
+        NSDictionary *dic = @{@"token": _userModel.token};
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
+        [GGNetWork getHttp:@"user/loginbytoken" parameters:params sucess:^(id responseObj) {
+            if (responseObj) {
+                NSInteger code = [[responseObj objectForKey:@"code"] intValue];
+                if(code == 1){
+                    NSDictionary *dic = [responseObj objectForKey:@"data"];
+                    UserModel *user = [CommonHelp parseUserModel:dic];
+                    user.token = _userModel.token;
+                    [CommonHelp saveUser:user];
+                    [self.rootView closeSDK];
+                    //TD
+                    [TalkingDataAppCpa onLogin:user.user_id];
+                } else {
+                    NSDictionary *dic = @{@"code": [NSString stringWithFormat:@"%ld",(long)code]};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil userInfo:dic];
+                    [self showToast:code];
+                }
+            }
+        } failed:^(NSString *errorMsg) {
+            [SVProgressHUD showErrorWithStatus:@"链接失败"];
+        }];
+    } else {
+        NSString *username = _userModel.username;
+        NSString *password = _userModel.password;
+        NSString *userid = nil;
+        
+        if (_accountField.userInteractionEnabled == YES) {
+            if([StringUtil isEmpty:_accountField.text]) {
+                [SVProgressHUD showErrorWithStatus:@"用户名不能为空"];
+                return;
+            }
+            
+            if([StringUtil isEmpty:_passWordField.text]) {
+                [SVProgressHUD showErrorWithStatus:@"密码不能为空"];
+                return;
+            }
+            username = _accountField.text;
+            password = _passWordField.text;
+            userid = @"";
+        } else {
+            userid = _userModel.user_id;
         }
         
-        if([StringUtil isEmpty:_passWordField.text]) {
-            [SVProgressHUD showErrorWithStatus:@"密码不能为空"];
-            return;
-        }
-        username = _accountField.text;
-        password = _passWordField.text;
-        origin = @"0";
-        userid = @"";
-    } else {
-        userid = [Common getUser].user_id;
-    }
-    
-    NSDictionary *dic = @{@"account": username,
-                          @"password": password,
-//                          @"origin": origin,
-                          @"user_id": userid
-                          };
-
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
-    [GGNetWork getHttp:@"user/login" parameters:params sucess:^(id responseObj) {
-        if (responseObj) {
-            NSInteger code = [[responseObj objectForKey:@"code"] intValue];
-            if(code == 1){                
-                NSDictionary *dic = [responseObj objectForKey:@"data"];
-                UserModel *user = [JsonUtil parseUserModel:dic];
-                user.username = username;
-                user.password = password;
-                user.origin = origin;
-                
-                //保存账户密码
-                [self saveUsers:user];
-                //设置当前用户信息
-                [Common setUser:user];
-                [self.rootView closeSDK];
-                //TD
-                [TalkingDataAppCpa onLogin:user.user_id];
-            } else {
-                NSDictionary *dic = @{@"code": [NSString stringWithFormat:@"%ld",(long)code]};
-                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil userInfo:dic];
-                [self showToast:code];
+        NSDictionary *dic = @{@"account": username,
+                              @"password": password,
+                              @"user_id": userid
+                              };
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
+        [GGNetWork getHttp:@"user/login" parameters:params sucess:^(id responseObj) {
+            if (responseObj) {
+                NSInteger code = [[responseObj objectForKey:@"code"] intValue];
+                if(code == 1){
+                    NSDictionary *dic = [responseObj objectForKey:@"data"];
+                    UserModel *user = [CommonHelp parseUserModel:dic];
+                    user.username = username;
+                    user.password = password;
+                    [CommonHelp saveUser:user];
+                    
+                    [self.rootView closeSDK];
+                    //TD
+                    [TalkingDataAppCpa onLogin:user.user_id];
+                } else {
+                    NSDictionary *dic = @{@"code": [NSString stringWithFormat:@"%ld",(long)code]};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil userInfo:dic];
+                    [self showToast:code];
+                }
             }
-        }
-    } failed:^(NSString *errorMsg) {
-        [SVProgressHUD showErrorWithStatus:@"链接失败"];
-    }];
-}
-
-/**
- *  游客登陆
- */
-- (void)touristsBtnClick
-{
-    NSLog(@"游客登陆");
-    [self.rootView showTabByTag:TYPE_TOURISTS_LOGIN];
+        } failed:^(NSString *errorMsg) {
+            [SVProgressHUD showErrorWithStatus:@"链接失败"];
+        }];
+    }
 }
 
 /**
@@ -595,14 +528,13 @@
 }
 
 /**
- *  新浪登陆
+ *  暴风登陆
  */
 - (void)sinaBtnClick
 {
-    NSLog(@"新浪登陆");
+    NSLog(@"暴风登陆");
     
     OtherLoginViewController *olVct = [[OtherLoginViewController alloc] init];
-    olVct.client = @"sina";
     olVct.cancelOtherLoginBlock = ^() {
         [self.rootView showSDK];
     };
@@ -617,94 +549,23 @@
     [self.rootView.controller presentViewController:nc animated:YES completion:^{
         [self.rootView hiddenSDK];
     }];
-
-//    if (![WeiboSDK isWeiboAppInstalled]) {
-//        [self.rootView closeSDK];
-//    } 
-//    if ([ShareSDK hasAuthorizedWithType:ShareTypeSinaWeibo]) {
-//        [self.rootView closeSDK];
-//    } else {
-//        [ShareSDK authWithType:ShareTypeSinaWeibo options:[ShareSDK authOptionsWithAutoAuth:YES allowCallback:YES scopes:nil powerByHidden:YES followAccounts:nil authViewStyle:SSAuthViewStyleFullScreenPopup viewDelegate:nil authManagerViewDelegate:nil] result:^(SSAuthState state, id<ICMErrorInfo> error) {
-//            if (state == SSAuthStateSuccess) {
-//                NSLog(@"授权成功~");
-//                [ShareSDK getUserInfoWithType:ShareTypeSinaWeibo authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
-//                    if (result) {
-//                        [self otherLoginRequestWithClient:@"SinaWeibo" nickname:[userInfo nickname] uid:[userInfo uid]];
-//                    }
-//                }];
-//            } else if (state == SSAuthStateFail) {
-//                NSLog(@"授权失败~");
-//            }
-//        }];
-//    }
 }
-
-/**
- *  腾讯登陆
- */
-- (void)tencentBtnClick
-{
-    NSLog(@"腾讯登陆");
-//    OtherLoginViewController *olVct = [[OtherLoginViewController alloc] init];
-//    olVct.client = @"QQ";
-//    [self.rootView.controller presentViewController:olVct animated:YES completion:^{
-//        [self.rootView closeSDK];
-//    }];
-//    [ShareSDK getUserInfoWithType:ShareTypeQQSpace authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
-//        if (result) {
-//            [self otherLoginRequestWithClient:@"QQ" nickname:[userInfo nickname] uid:[userInfo uid]];
-//        } 
-//    }];
-}
-
-//- (void)otherLoginRequestWithClient:(NSString *)client nickname:(NSString *)nickname uid:(NSString *)uid
-//{
-//    NSDictionary *dic = @{@"channel": @"ios",
-//                          @"client": client,
-//                          @"nick_name": nickname,
-//                          @"u_id": uid
-//                          };
-//    
-//    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
-//    [GGNetWork getHttp:@"user/rollbacks" parameters:params sucess:^(id responseObj) {
-//        if (responseObj) {
-//            NSInteger code = [[responseObj objectForKey:@"code"] intValue];
-//            if(code == 1){
-//                NSDictionary *dic = [responseObj objectForKey:@"data"];
-//                UserModel *user = [JsonUtil parseUserModel:dic];
-//                
-//                if (self.rootView.loginDelegate && [self.rootView.loginDelegate respondsToSelector:@selector(loginSuccessedCallBack:userID:ticket:)]) {
-//                    [self.rootView.loginDelegate loginSuccessedCallBack:code userID:user.user_id ticket:user.ticket];
-//                }
-//                
-//                //保存账户密码
-//                [self saveUsers:user];
-//                //设置当前用户信息
-//                [Common setUser:user];
-//                //关闭SDK
-//                [self.rootView closeSDK];
-//            } else {
-//                if (self.rootView.loginDelegate && [self.rootView.loginDelegate respondsToSelector:@selector(loginFailedCallBack:)]) {
-//                    [self.rootView.loginDelegate loginFailedCallBack:code];
-//                }
-//                [self showToast:code];
-//            }
-//        }
-//    } failed:^(NSString *errorMsg) {
-//        [SVProgressHUD showErrorWithStatus:@"链接失败"];
-//    }];
-//}
 
 #pragma mark - resetView
 - (void)resetView
 {
-    if ([Common getUser]) {
-        _accountField.text = [Common getUser].username;
-        _passWordField.text = [Common getUser].password;
+    if ([CommonHelp getUser]) {
+        _accountField.text = [CommonHelp getUser].username;
+        _userModel = [CommonHelp getUser];
+        if ([CommonHelp getUser].token.length) {
+            _passWordField.text = @"123456";
+        } else {
+            _passWordField.text = [CommonHelp getUser].password;
+        }
     }
     
     //set forgotPassWordBtn and forgetLab state
-    [self setUpForgotPasswordBtnWithOrigin:[Common getUser].origin];
+    [self setUpForgotPasswordBtnWithToken:[CommonHelp getUser].token];
     //set accountField and passwordField
     [self setUpAccountFieldAndPasswordField];
     
@@ -767,16 +628,19 @@
         _passWordField.textColor = [UIColor whiteColor];
     } else {
         _accountField.text = user.username;
-        _passWordField.text = user.password;
+        if (user.token.length) {
+            _passWordField.text = @"123456";
+        } else {
+            _passWordField.text = user.password;
+        }
+        _userModel = user;
         _accountField.userInteractionEnabled = NO;
         _passWordField.userInteractionEnabled = NO;
         _passWordField.textColor = [UIColor grayColor];
-        [Common setUser:user];
-        [Common setBindPhone:NO];
     }
     
     //set forgotPassWordBtn and forgetLab state
-    [self setUpForgotPasswordBtnWithOrigin:user.origin];
+    [self setUpForgotPasswordBtnWithToken:user.token];
     [tableView reloadData];
 }
 

@@ -10,9 +10,7 @@
 #import "CXCommon.h"
 #import "DeviceInfo.h"
 #import "TalkingDataAppCpa.h"
-
-#define kBaseURL @"http://sdk.gcenter.baofeng.com"
-//#define kBaseURL @"http://14.17.126.90:8091"
+#import "CommonHelp.h"
 
 @interface OtherLoginViewController () <UIWebViewDelegate>
 
@@ -33,7 +31,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"新浪微博";
+    self.title = @"暴风游戏";
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonClick)];
     self.navigationItem.leftBarButtonItem = leftItem;
@@ -71,10 +69,7 @@
     [webView setDelegate:self];
     
     NSString *phoneVer = [[UIDevice currentDevice] systemVersion];
-    NSString *deviceName = [DeviceInfo getDeviceVersion];
-    NSMutableDictionary *infoDic = [USER_DEFAULT objectForKey:INITINFO];
-    
-    NSString *urlStr = [NSString stringWithFormat:@"%@/user/threelogin?client=%@&app_id=%@&server_id=%@&device_name=%@&os_version=%@&imei=%@",kBaseURL,self.client,[infoDic objectForKey:@"appID"],[infoDic objectForKey:@"serviceID"],deviceName,phoneVer,[DeviceInfo getIDFA]];
+    NSString *urlStr = [NSString stringWithFormat:@"http://sso.baofeng.net/api/mlogin/default?from=gamecenter&version=%@&did=%@&btncolor=blue",phoneVer,[DeviceInfo getIDFA]];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
     
     [self.view addSubview:webView];
@@ -101,28 +96,41 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSURL *url = [request URL];
-    if ([url.scheme isEqualToString:@"cxapi"]) {
-        NSString *jsonStr = [url.absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSRange range = [jsonStr rangeOfString:@"{"];
-        if (range.location != NSNotFound) {
-            jsonStr = [jsonStr substringFromIndex:range.location];
-        }
-        NSData *jsonData = [jsonStr dataUsingEncoding:NSASCIIStringEncoding];
-        NSDictionary *dic = [JsonUtil toArrayOrNSDictionary:jsonData];
-        UserModel *user = [JsonUtil parseUserModel:dic];
+    NSString *absoluteString = url.absoluteString;
+    NSRange token = [absoluteString rangeOfString:@"token="];
+    NSRange absolute = [absoluteString rangeOfString:@"http://sso.baofeng.net/api/mlogin/appok"];
+    if (token.location != NSNotFound && absolute.location != NSNotFound) {
+        NSString *firstStr = [absoluteString substringFromIndex:token.location + 6];
+        NSRange flag = [firstStr rangeOfString:@"&"];
+        NSString *tokenStr = [firstStr substringToIndex:flag.location];
         
-        if (self.loginSuccessedBlock) {
-            self.loginSuccessedBlock(user.user_id, user.ticket);
-        }
+        NSDictionary *dic = @{@"token": tokenStr};
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
+        [GGNetWork getHttp:@"user/loginbytoken" parameters:params sucess:^(id responseObj) {
+            if (responseObj) {
+                NSInteger code = [[responseObj objectForKey:@"code"] intValue];
+                if(code == 1){
+                    NSDictionary *dic = [responseObj objectForKey:@"data"];
+                    UserModel *user = [CommonHelp parseUserModel:dic];
+                    user.token = tokenStr;
+                    [CommonHelp saveUser:user];
 
-        //保存账户密码
-        [self saveUsers:user];
-        //设置当前用户信息
-        [Common setUser:user];
-        //TD
-        [TalkingDataAppCpa onLogin:user.user_id];
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
+                    if (self.loginSuccessedBlock) {
+                        self.loginSuccessedBlock(user.user_id, user.ticket);
+                    }
+                    //TD
+                    [TalkingDataAppCpa onLogin:user.user_id];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                } else {
+                    NSDictionary *dic = @{@"code": [NSString stringWithFormat:@"%ld",(long)code]};
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:nil userInfo:dic];
+                    [self showToast:code];
+                }
+            }
+        } failed:^(NSString *errorMsg) {
+            [SVProgressHUD showErrorWithStatus:@"链接失败"];
+        }];
     }
     return YES;
 }

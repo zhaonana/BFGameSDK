@@ -41,8 +41,6 @@
 		395F416719EE19010002AB2D /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 395F413519EE19010002AB2D /* AFURLConnectionOperation.m */; };
 		395F416819EE19010002AB2D /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 395F413719EE19010002AB2D /* AFXMLRequestOperation.m */; };
 		395F416919EE19010002AB2D /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 395F413919EE19010002AB2D /* UIImageView+AFNetworking.m */; };
-		395F416A19EE19010002AB2D /* JsonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 395F413E19EE19010002AB2D /* JsonUtil.m */; };
-		395F416C19EE19010002AB2D /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 395F414319EE19010002AB2D /* Common.m */; };
 		395F416D19EE19010002AB2D /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 395F414519EE19010002AB2D /* UserModel.m */; };
 		395F416E19EE19010002AB2D /* GGHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 395F414819EE19010002AB2D /* GGHTTPClient.m */; };
 		395F417019EE19010002AB2D /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 395F414D19EE19010002AB2D /* SVProgressHUD.bundle */; };
@@ -98,7 +96,6 @@
 		395F424519EE94AA0002AB2D /* CXshoujichangtouming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 395F424319EE94AA0002AB2D /* CXshoujichangtouming@2x.png */; };
 		39621A9019EF7A4E00F5F18E /* CXfanhui.png in Resources */ = {isa = PBXBuildFile; fileRef = 39621A8E19EF7A4E00F5F18E /* CXfanhui.png */; };
 		39621A9119EF7A4E00F5F18E /* CXfanhui@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39621A8F19EF7A4E00F5F18E /* CXfanhui@2x.png */; };
-		39621A9519EF7D8D00F5F18E /* TouristsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39621A9419EF7D8D00F5F18E /* TouristsViewController.m */; };
 		3997A52719F1084E0073D6F2 /* padChangtouming.png in Resources */ = {isa = PBXBuildFile; fileRef = 3997A50919F1084E0073D6F2 /* padChangtouming.png */; };
 		3997A52819F1084E0073D6F2 /* padChangtouming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3997A50A19F1084E0073D6F2 /* padChangtouming@2x.png */; };
 		3997A52919F1084E0073D6F2 /* padChangxiangyouxi.png in Resources */ = {isa = PBXBuildFile; fileRef = 3997A50B19F1084E0073D6F2 /* padChangxiangyouxi.png */; };
@@ -147,6 +144,7 @@
 		39B6BB9919F914F200394492 /* padXiala@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39B6BB9719F914F200394492 /* padXiala@2x.png */; };
 		39DBFA7D1A5BF10300F75976 /* baofeng.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DBFA7C1A5BF10300F75976 /* baofeng.png */; };
 		39DBFA7F1A5BF14000F75976 /* bx_icon_baofeng.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DBFA7E1A5BF14000F75976 /* bx_icon_baofeng.png */; };
+		39FC2C5E1A636B68001C2521 /* CommonHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 39FC2C5D1A636B68001C2521 /* CommonHelp.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,10 +215,6 @@
 		395F413819EE19010002AB2D /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		395F413919EE19010002AB2D /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		395F413B19EE19010002AB2D /* CXCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXCommon.h; sourceTree = "<group>"; };
-		395F413D19EE19010002AB2D /* JsonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonUtil.h; sourceTree = "<group>"; };
-		395F413E19EE19010002AB2D /* JsonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonUtil.m; sourceTree = "<group>"; };
-		395F414219EE19010002AB2D /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		395F414319EE19010002AB2D /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		395F414419EE19010002AB2D /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		395F414519EE19010002AB2D /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		395F414719EE19010002AB2D /* GGHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGHTTPClient.h; sourceTree = "<group>"; };
@@ -301,8 +295,6 @@
 		395F424319EE94AA0002AB2D /* CXshoujichangtouming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CXshoujichangtouming@2x.png"; sourceTree = "<group>"; };
 		39621A8E19EF7A4E00F5F18E /* CXfanhui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CXfanhui.png; sourceTree = "<group>"; };
 		39621A8F19EF7A4E00F5F18E /* CXfanhui@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CXfanhui@2x.png"; sourceTree = "<group>"; };
-		39621A9319EF7D8D00F5F18E /* TouristsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristsViewController.h; sourceTree = "<group>"; };
-		39621A9419EF7D8D00F5F18E /* TouristsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristsViewController.m; sourceTree = "<group>"; };
 		3997A50919F1084E0073D6F2 /* padChangtouming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = padChangtouming.png; sourceTree = "<group>"; };
 		3997A50A19F1084E0073D6F2 /* padChangtouming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "padChangtouming@2x.png"; sourceTree = "<group>"; };
 		3997A50B19F1084E0073D6F2 /* padChangxiangyouxi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = padChangxiangyouxi.png; sourceTree = "<group>"; };
@@ -354,6 +346,8 @@
 		39B6BB9719F914F200394492 /* padXiala@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "padXiala@2x.png"; sourceTree = "<group>"; };
 		39DBFA7C1A5BF10300F75976 /* baofeng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baofeng.png; sourceTree = "<group>"; };
 		39DBFA7E1A5BF14000F75976 /* bx_icon_baofeng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bx_icon_baofeng.png; sourceTree = "<group>"; };
+		39FC2C5C1A636B68001C2521 /* CommonHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHelp.h; sourceTree = "<group>"; };
+		39FC2C5D1A636B68001C2521 /* CommonHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHelp.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -462,7 +456,6 @@
 				395F417A19EE19570002AB2D /* Alert */,
 				395F412619EE19010002AB2D /* AFNetworking */,
 				395F413A19EE19010002AB2D /* Common */,
-				395F413C19EE19010002AB2D /* Json */,
 				395F413F19EE19010002AB2D /* Model */,
 				395F414619EE19010002AB2D /* NetWork */,
 				395F414C19EE19010002AB2D /* SVProgressHUD */,
@@ -535,24 +528,15 @@
 				395F413B19EE19010002AB2D /* CXCommon.h */,
 				3929BE1719FA117B00F0033C /* DeviceInfo.h */,
 				3929BE1819FA117B00F0033C /* DeviceInfo.m */,
+				39FC2C5C1A636B68001C2521 /* CommonHelp.h */,
+				39FC2C5D1A636B68001C2521 /* CommonHelp.m */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		395F413C19EE19010002AB2D /* Json */ = {
-			isa = PBXGroup;
-			children = (
-				395F413D19EE19010002AB2D /* JsonUtil.h */,
-				395F413E19EE19010002AB2D /* JsonUtil.m */,
-			);
-			path = Json;
 			sourceTree = "<group>";
 		};
 		395F413F19EE19010002AB2D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				395F414219EE19010002AB2D /* Common.h */,
-				395F414319EE19010002AB2D /* Common.m */,
 				395F414419EE19010002AB2D /* UserModel.h */,
 				395F414519EE19010002AB2D /* UserModel.m */,
 				394A63A41A0A01D10013EF7E /* CXPayParams.h */,
@@ -615,7 +599,6 @@
 			isa = PBXGroup;
 			children = (
 				395F41A119EE1B1D0002AB2D /* Base */,
-				39621A9219EF7D6100F5F18E /* TouristsLogin */,
 				395F41A619EE1B1D0002AB2D /* BindPhone */,
 				395F41A919EE1B1D0002AB2D /* ChangePassword */,
 				395F41AC19EE1B1D0002AB2D /* ForgetPassword */,
@@ -757,15 +740,6 @@
 				395F41EB19EE1CF90002AB2D /* CXzhucedianji@2x.png */,
 			);
 			path = iphone;
-			sourceTree = "<group>";
-		};
-		39621A9219EF7D6100F5F18E /* TouristsLogin */ = {
-			isa = PBXGroup;
-			children = (
-				39621A9319EF7D8D00F5F18E /* TouristsViewController.h */,
-				39621A9419EF7D8D00F5F18E /* TouristsViewController.m */,
-			);
-			path = TouristsLogin;
 			sourceTree = "<group>";
 		};
 		3997A50819F1084E0073D6F2 /* ipad */ = {
@@ -1002,11 +976,9 @@
 				395F41CB19EE1B1D0002AB2D /* RegistViewController.m in Sources */,
 				39990F261A00EDFE0097B0F7 /* OtherLoginViewController.m in Sources */,
 				395F417119EE19010002AB2D /* SVProgressHUD.m in Sources */,
-				395F416A19EE19010002AB2D /* JsonUtil.m in Sources */,
 				395F416E19EE19010002AB2D /* GGHTTPClient.m in Sources */,
 				393BF3D61A1616AA00FEA2F2 /* CXComPlatformBase.m in Sources */,
 				395F417D19EE19570002AB2D /* CustomIOS7AlertView.m in Sources */,
-				395F416C19EE19010002AB2D /* Common.m in Sources */,
 				395F417519EE19010002AB2D /* NSString+JSONCategories.m in Sources */,
 				394A63A61A0A01D10013EF7E /* CXPayParams.m in Sources */,
 				393BF3DC1A162B0000FEA2F2 /* CXInitConfigure.m in Sources */,
@@ -1018,13 +990,13 @@
 				39A1072519EFF188003062A9 /* UserLoginViewController.m in Sources */,
 				395F410419EE18800002AB2D /* main.m in Sources */,
 				395F41C519EE1B1D0002AB2D /* LoginViewController.m in Sources */,
-				39621A9519EF7D8D00F5F18E /* TouristsViewController.m in Sources */,
 				3929BE1919FA117B00F0033C /* DeviceInfo.m in Sources */,
 				395F417719EE19010002AB2D /* PreferencesUtils.m in Sources */,
 				395F416D19EE19010002AB2D /* UserModel.m in Sources */,
 				395F416519EE19010002AB2D /* AFNetworkActivityIndicatorManager.m in Sources */,
 				395F417819EE19010002AB2D /* StringUtil.m in Sources */,
 				395F417319EE19010002AB2D /* NSData+Base64.m in Sources */,
+				39FC2C5E1A636B68001C2521 /* CommonHelp.m in Sources */,
 				395F41C419EE1B1D0002AB2D /* ForgotPasswordViewController.m in Sources */,
 				395F417419EE19010002AB2D /* NSObject+JSONCategories.m in Sources */,
 				399F118F19F6070C001C16B2 /* ResetpasswordViewController.m in Sources */,

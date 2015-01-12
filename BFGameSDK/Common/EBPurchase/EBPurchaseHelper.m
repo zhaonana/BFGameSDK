@@ -8,7 +8,7 @@
 
 #import "EBPurchaseHelper.h"
 #import "EBPurchase.h"
-#import "Common.h"
+#import "CommonHelp.h"
 #import "GGNetWork.h"
 #import "SVProgressHUD.h"
 #import "BaseViewController.h"
@@ -51,7 +51,7 @@ static EBPurchaseHelper * _sharedHelper;
     NSDictionary *dic = @{@"good_id": CXParams.good_id,
                           @"cp_bill_no": CXParams.cp_bill_no,
                           @"notify_url": CXParams.notify_url,
-                          @"user_id": [Common getUser].user_id,
+                          @"user_id": [CommonHelp getUser].user_id,
                           @"extra": CXParams.extra
                           };
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
@@ -148,7 +148,7 @@ static EBPurchaseHelper * _sharedHelper;
         NSString *ticket = [transactionReceipt base64Encoding];
         NSDictionary *dic = @{@"order_id": _order_id,
                               @"product_id": _product_id,
-                              @"user_id": [Common getUser].user_id,
+                              @"user_id": [CommonHelp getUser].user_id,
                               @"ticket": ticket
                               };
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
@@ -164,7 +164,7 @@ static EBPurchaseHelper * _sharedHelper;
                                           };
                     [[NSNotificationCenter defaultCenter] postNotificationName:PURCHASE_SUCCESSED_NOTIFICATION object:nil userInfo:dic];
                     
-                    [TalkingDataAppCpa onPay:[Common getUser].user_id withOrderId:_order_id withAmount:_amount withCurrencyType:@"CNY" withPayType:@"In App Purchases"];
+                    [TalkingDataAppCpa onPay:[CommonHelp getUser].user_id withOrderId:_order_id withAmount:_amount withCurrencyType:@"CNY" withPayType:@"In App Purchases"];
                 } else {
                     NSLog(@"验证收据失败~");
                 }

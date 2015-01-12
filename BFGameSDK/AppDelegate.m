@@ -20,7 +20,7 @@
     self.window.rootViewController = mainCon;
     
     //TD
-    [TalkingDataAppCpa init:@"9ab82b2f6801479495e059551b099325" withChannelId:@"AppStore"];
+    [TalkingDataAppCpa init:@"your key" withChannelId:@"your channelId"];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

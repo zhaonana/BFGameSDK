@@ -7,6 +7,7 @@
 //
 
 #import "ResetpasswordViewController.h"
+#import "CommonHelp.h"
 
 @interface ResetpasswordViewController () {
     UITextField *_codeField;
@@ -16,6 +17,7 @@
     NSString    *_newPassword;
     UIButton    *_getCodeBtn;
     NSString    *_countDownTime;
+    NSString    *_phone_number;
 }
 
 @end
@@ -272,9 +274,12 @@
  */
 - (void)getCodeBtnClick
 {
-   _username = [[NSUserDefaults standardUserDefaults] objectForKey:@"pUserName"];
-    
-    NSDictionary *dic = @{@"username": _username};
+    _username = [[NSUserDefaults standardUserDefaults] objectForKey:@"pUserName"];
+    _phone_number = [[NSUserDefaults standardUserDefaults] objectForKey:@"pPhoneNumber"];
+
+    NSDictionary *dic = @{@"account": _username,
+                          @"phone_number": _phone_number
+                          };
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
     
     [GGNetWork getHttp:@"user/sendforgetpwdcode" parameters:params sucess:^(id responseObj) {
@@ -303,6 +308,7 @@
     _codeNumber = _codeField.text;
     _newPassword = _passwordField.text;
     _username = [[NSUserDefaults standardUserDefaults] objectForKey:@"pUserName"];
+    _phone_number = [[NSUserDefaults standardUserDefaults] objectForKey:@"pPhoneNumber"];
 
     if ([StringUtil isEmpty:_codeNumber]) {
         [SVProgressHUD showErrorWithStatus:@"验证码不能为空"];
@@ -313,23 +319,24 @@
         return;
     }
     
-    NSDictionary *dic = @{@"username": _username,
+    NSDictionary *dic = @{@"account": _username,
                           @"code": _codeNumber,
-                          @"new_pwd": _newPassword
+                          @"new_pwd": _newPassword,
+                          @"phone_number": _phone_number
                           };
 
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:dic];
     
-    [GGNetWork getHttp:@"user/resetpwd" parameters:params sucess:^(id responseObj) {
+    [GGNetWork getHttp:@"user/resetforgetpwd" parameters:params sucess:^(id responseObj) {
         if (responseObj) {
             NSInteger code = [[responseObj objectForKey:@"code"] intValue];
             if (code == 1) {
                 //发送回调
-                UserModel *user = [Common getUser];
+                UserModel *user = [CommonHelp getUser];
                 user.username = _username;
                 user.password =_newPassword;
-                [self saveUsers:user];
-                [Common setUser:user];
+                
+                [CommonHelp saveUser:user];
                 
                 [self.rootView closeSDK];
             } else {

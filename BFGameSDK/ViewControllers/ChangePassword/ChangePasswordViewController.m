@@ -8,7 +8,7 @@
 
 #import "ChangePasswordViewController.h"
 #import "StringUtil.h"
-#import "Common.h"
+#import "CommonHelp.h"
 #import "SVProgressHUD.h"
 #import "GGNetWork.h"
 
@@ -284,7 +284,7 @@
         [SVProgressHUD showErrorWithStatus:@"旧密码不能为空"];
         return;
     }
-    if (![oldPassword isEqualToString:[Common getUser].password]) {
+    if (![oldPassword isEqualToString:[CommonHelp getUser].password]) {
         [SVProgressHUD showErrorWithStatus:@"旧密码不正确"];
         return;
     }
@@ -301,8 +301,8 @@
         return;
     }
     
-    NSDictionary *dic = @{@"user_id": [Common getUser].user_id,
-                          @"account": [Common getUser].username,
+    NSDictionary *dic = @{@"user_id": [CommonHelp getUser].user_id,
+                          @"account": [CommonHelp getUser].username,
                           @"original_pwd": oldPassword,
                           @"new_pwd": newPassword
                           };
@@ -314,10 +314,9 @@
             NSInteger code = [[responseObj objectForKey:@"code"] intValue];
             if (code == 1) {
                 [SVProgressHUD showSuccessWithStatus:@"修改成功"];
-                UserModel *user = [Common getUser];
+                UserModel *user = [CommonHelp getUser];
                 user.password = newPassword;
-                [self saveUsers:user];
-                [Common setUser:user];
+                [CommonHelp saveUser:user];
                 [self performSelector:@selector(backBtnClick) withObject:self afterDelay:0.3];
             } else {
                 [self showToast:code];

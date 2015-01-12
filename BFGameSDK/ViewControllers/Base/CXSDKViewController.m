@@ -12,12 +12,11 @@
 #import "RegistViewController.h"
 #import "IsBindPhoneViewController.h"
 #import "ChangePasswordViewController.h"
-#import "TouristsViewController.h"
 #import "BindPhoneViewController.h"
 #import "ForgotPasswordViewController.h"
 #import "ResetpasswordViewController.h"
 #import "CustomIOS7AlertView.h"
-#import "Common.h"
+#import "CommonHelp.h"
 #import "CXCommon.h"
 #import "DeviceInfo.h"
 
@@ -106,8 +105,8 @@
 {
     [_alertView close];
 
-    NSDictionary *dic = @{@"user_id": [Common getUser].user_id ? [Common getUser].user_id : @"",
-                          @"ticket": [Common getUser].ticket ? [Common getUser].ticket : @""
+    NSDictionary *dic = @{@"user_id": [CommonHelp getUser].user_id ? [CommonHelp getUser].user_id : @"",
+                          @"ticket": [CommonHelp getUser].ticket ? [CommonHelp getUser].ticket : @""
                           };
     [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCESSED_NOTIFICATION object:nil userInfo:dic];
 }
@@ -150,7 +149,7 @@
         [vc.view removeFromSuperview];
     }
     
-    if ([Common getUser].username.length) {
+    if ([CommonHelp getUser].username.length) {
         [vct.view removeFromSuperview];
         [_bodyView addSubview:userVct.view];
         _currentVct = userVct;
@@ -188,7 +187,7 @@
     for (BaseViewController *vc in _actArray) {
         [vc.view removeFromSuperview];
     }
-    if ([Common getUser].username.length) {
+    if ([CommonHelp getUser].username.length) {
         [vct.view removeFromSuperview];
         [_bodyView addSubview:userVct.view];
         _currentVct = userVct;
@@ -223,10 +222,6 @@
     cpVct.view.frame = KIPHONE_ALERT_FRAME;
     cpVct.rootView = self;
     
-    TouristsViewController *tlVct = [[TouristsViewController alloc] init];
-    tlVct.view.frame = KIPHONE_ALERT_FRAME;
-    tlVct.rootView = self;
-    
     BindPhoneViewController *bpVct = [[BindPhoneViewController alloc] init];
     bpVct.view.frame = KIPHONE_ALERT_FRAME;
     bpVct.rootView = self;
@@ -239,7 +234,7 @@
     rsVct.view.frame = KIPHONE_ALERT_FRAME;
     rsVct.rootView = self;
     
-    _actArray = @[loginVct, userVct, registerVct, ibpVct, cpVct, tlVct, bpVct, fpVct, rsVct];
+    _actArray = @[loginVct, userVct, registerVct, ibpVct, cpVct, bpVct, fpVct, rsVct];
     
     [_bodyView addSubview:loginVct.view];
     _currentVct = loginVct;
@@ -268,10 +263,6 @@
     cpVct.view.frame = KIPAD_ALERT_FRAME;
     cpVct.rootView = self;
     
-    TouristsViewController *tlVct = [[TouristsViewController alloc] init];
-    tlVct.view.frame = KIPAD_ALERT_FRAME;
-    tlVct.rootView = self;
-    
     BindPhoneViewController *bpVct = [[BindPhoneViewController alloc] init];
     bpVct.view.frame = KIPAD_ALERT_FRAME;
     bpVct.rootView = self;
@@ -284,7 +275,7 @@
     rsVct.view.frame = KIPAD_ALERT_FRAME;
     rsVct.rootView = self;
     
-    _actArray = @[loginVct, userVct, registerVct, ibpVct, cpVct, tlVct, bpVct, fpVct, rsVct];
+    _actArray = @[loginVct, userVct, registerVct, ibpVct, cpVct, bpVct, fpVct, rsVct];
     
     [_bodyView addSubview:loginVct.view];
     _currentVct = loginVct;

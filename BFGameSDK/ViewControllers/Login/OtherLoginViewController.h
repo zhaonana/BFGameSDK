@@ -10,7 +10,6 @@
 
 @interface OtherLoginViewController : BaseViewController
 
-@property (nonatomic, copy) NSString *client;
 @property (nonatomic, copy) void (^cancelOtherLoginBlock)();
 @property (nonatomic, copy) void (^loginSuccessedBlock)(NSString *user_id, NSString *ticket);
 
