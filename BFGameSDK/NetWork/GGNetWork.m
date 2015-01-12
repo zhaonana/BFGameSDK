@@ -123,10 +123,10 @@ NSString* HMAC_SHA1SignatureForText(NSString *text, NSString *secret) {
     NSString *deviceName = [DeviceInfo getDeviceVersion];
     NSMutableDictionary *infoDic = [USER_DEFAULT objectForKey:INITINFO];
     
-    NSDictionary *dic = @{@"app_id": [infoDic objectForKey:@"appID"],
-                          @"server_id": [infoDic objectForKey:@"serviceID"],
+    NSDictionary *dic = @{@"server_id": [infoDic objectForKey:@"serviceID"],
                           @"cp_id": [infoDic objectForKey:@"cpID"],
                           @"game_id": [infoDic objectForKey:@"gameID"],
+                          @"channel_id": [infoDic objectForKey:@"channelID"],
                           @"os_version": phoneVer,
                           @"system": @"ios",
                           @"imei": [DeviceInfo getIDFA],

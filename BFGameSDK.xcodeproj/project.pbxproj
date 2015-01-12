@@ -1133,7 +1133,7 @@
 					"$(PROJECT_DIR)/BFGameSDK/a.appcpa.net",
 				);
 				PRODUCT_NAME = BFGameSDK;
-				PROVISIONING_PROFILE = "05bcef7b-1705-4c93-bbb0-f5bb77e3efe7";
+				PROVISIONING_PROFILE = "dde65b7f-a55c-45a8-9f55-ea1c742a6016";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1157,7 +1157,7 @@
 					"$(PROJECT_DIR)/BFGameSDK/a.appcpa.net",
 				);
 				PRODUCT_NAME = BFGameSDK;
-				PROVISIONING_PROFILE = "05bcef7b-1705-4c93-bbb0-f5bb77e3efe7";
+				PROVISIONING_PROFILE = "dde65b7f-a55c-45a8-9f55-ea1c742a6016";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};

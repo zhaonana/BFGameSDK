@@ -23,12 +23,12 @@ static CXComPlatformBase *sharedSingleton = nil;
 - (void)CXInit:(CXInitConfigure *)configure
 {
     CXSDKViewController *cxVC = [[CXSDKViewController alloc] init];
-    [cxVC setAppID:configure.appId];
     [cxVC setCpKey:configure.cpKey];
-    
     [cxVC setCpID:configure.cpId];
     [cxVC setGameID:configure.gameId];
     [cxVC setServerID:configure.serverId];
+    [cxVC setChannelID:configure.channelId];
+    
     [cxVC initSDK:configure.controller];
 }
 

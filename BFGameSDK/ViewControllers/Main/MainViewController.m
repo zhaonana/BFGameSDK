@@ -44,12 +44,12 @@
 - (void)startSDK
 {
     CXInitConfigure *cfg = [[CXInitConfigure alloc] init];
-    cfg.appId = @"10003";
-    cfg.cpKey = @"123456";
     
+    cfg.cpKey = @"123456";
     cfg.cpId = @"10010";
-    cfg.gameId = @"25";
-    cfg.serverId = @"2";
+    cfg.gameId = @"1";
+//    cfg.serverId = @"2";
+//    cfg.channelId = @"213";
     cfg.controller = self;
     [[CXComPlatformBase defaultPlatform] CXInit:cfg];
 
@@ -77,7 +77,7 @@
 - (void)startPay
 {
     CXPayParams *params = [[CXPayParams alloc] init];
-    params.good_id = @"25";
+    params.good_id = @"1";
     params.cp_bill_no = @"123456";
     params.notify_url = @"http://pay.zjszz.173.com/pay!finishOrder.action?aaa=bbb&ccc=ddd";
     params.extra = @"abc2013-05-24";

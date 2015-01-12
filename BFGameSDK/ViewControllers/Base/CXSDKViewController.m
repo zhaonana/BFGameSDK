@@ -49,10 +49,10 @@
 #pragma mark - initSDK
 - (void)initSDK:(UIViewController*)controller
 {
-    NSDictionary *dic = @{@"appID": _appID,
-                          @"serviceID": _serverID,
+    NSDictionary *dic = @{@"serviceID": _serverID ? _serverID : @"1",
                           @"cpID": _cpID,
-                          @"gameID": _gameID
+                          @"gameID": _gameID,
+                          @"channelID": _channelID ? _channelID : @"213"
                           };
     NSMutableDictionary *infoDic = [NSMutableDictionary dictionaryWithDictionary:dic];
     

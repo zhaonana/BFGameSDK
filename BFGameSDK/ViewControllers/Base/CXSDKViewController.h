@@ -37,10 +37,6 @@
  */
 @property (nonatomic, strong) NSString         *serverID;
 /**
- *  应用ID
- */
-@property (nonatomic, strong) NSString         *appID;
-/**
  *  合作者ID
  */
 @property (nonatomic, strong) NSString         *cpID;
@@ -48,6 +44,11 @@
  *  游戏ID
  */
 @property (nonatomic, strong) NSString         *gameID;
+/**
+ *  渠道ID
+ */
+@property (nonatomic, strong) NSString         *channelID;
+
 /**
  *  子界面
  */

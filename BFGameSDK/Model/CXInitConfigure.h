@@ -10,11 +10,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CXInitConfigure : NSObject
-
-/**
- *  应用ID
- */
-@property (nonatomic, copy) NSString *appId;
 /**
  *  游戏合作商秘钥
  */
@@ -31,6 +26,10 @@
  *  服务器ID
  */
 @property (nonatomic, copy) NSString *serverId;
+/**
+ *  渠道ID
+ */
+@property (nonatomic, copy) NSString *channelId;
 /**
  *  界面
  */
