@@ -128,12 +128,6 @@
     self.view.backgroundColor = [UIColor clearColor];
     self.tabBarController.view.backgroundColor = [UIColor clearColor];
     
-    //set background
-    UIView *background = [[UIView alloc] initWithFrame:KIPHONE_ALERT_FRAME];
-    [background setBackgroundColor:[UIColor blackColor]];
-    [background setAlpha:0.66];
-    [self.view addSubview:background];
-    
     //set logoView
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(26, 15, 177, 37)];
     [logoView setImage:[UIImage imageNamed:@"baofeng"]];
@@ -166,12 +160,6 @@
     self.view.frame = KIPAD_ALERT_FRAME;
     self.view.backgroundColor = [UIColor clearColor];
     self.tabBarController.view.backgroundColor = [UIColor clearColor];
-    
-    //set background
-    UIView *background = [[UIView alloc] initWithFrame:KIPAD_ALERT_FRAME];
-    [background setBackgroundColor:[UIColor blackColor]];
-    [background setAlpha:0.66];
-    [self.view addSubview:background];
     
     //set logoView
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(26, 15, 228, 48)];
