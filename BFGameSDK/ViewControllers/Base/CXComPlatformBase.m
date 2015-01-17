@@ -10,6 +10,8 @@
 #import "CXSDKViewController.h"
 
 static CXComPlatformBase *sharedSingleton = nil;
+static CXSDKViewController *cxVC = nil;
+
 @implementation CXComPlatformBase
 
 + (CXComPlatformBase *)defaultPlatform
@@ -20,16 +22,19 @@ static CXComPlatformBase *sharedSingleton = nil;
     return sharedSingleton;
 }
 
-- (void)CXInit:(CXInitConfigure *)configure
+- (void)initializeWithCpId:(NSString *)cpId andCpKey:(NSString *)cpKey andGameId:(NSString *)gameId andServerId:(NSString *)serverId andChannelId:(NSString *)channelId
 {
-    CXSDKViewController *cxVC = [[CXSDKViewController alloc] init];
-    [cxVC setCpKey:configure.cpKey];
-    [cxVC setCpID:configure.cpId];
-    [cxVC setGameID:configure.gameId];
-    [cxVC setServerID:configure.serverId];
-    [cxVC setChannelID:configure.channelId];
-    
-    [cxVC initSDK:configure.controller];
+    cxVC = [[CXSDKViewController alloc] init];
+    [cxVC setCpKey:cpKey];
+    [cxVC setCpID:cpId];
+    [cxVC setGameID:gameId];
+    [cxVC setServerID:serverId];
+    [cxVC setChannelID:channelId];
+}
+
+- (void)showLoginViewWithController:(UIViewController *)controller
+{
+    [cxVC initSDK:controller];
 }
 
 @end

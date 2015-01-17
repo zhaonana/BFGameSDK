@@ -14,7 +14,7 @@
 @interface CXPayParams : NSObject
 
 /**
- *  商品ID
+ *  商品ID 随机分配，需要提供给服务器productId一一对应
  */
 @property (nonatomic, copy) NSString *good_id;
 /**

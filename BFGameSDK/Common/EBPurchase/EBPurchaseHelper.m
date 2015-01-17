@@ -37,12 +37,12 @@ static EBPurchaseHelper * _sharedHelper;
     return _sharedHelper;
 }
 
-- (void)setOrdersParams:(CXPayParams *)params
+- (void)setOrdersParams:(CXPayParams *)order
 {
     demoPurchase = [[EBPurchase alloc] init];
     demoPurchase.delegate = self;
     isPurchased = NO;
-    [self requestOrdersWithParams:params];
+    [self requestOrdersWithParams:order];
 }
 
 #pragma mark - requestOrders

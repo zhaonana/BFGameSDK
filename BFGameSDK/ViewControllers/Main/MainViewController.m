@@ -8,7 +8,6 @@
 
 #import "MainViewController.h"
 #import "CXComPlatformBase.h"
-#import "CXInitConfigure.h"
 #import "SVProgressHUD.h"
 #import "CXPayParams.h"
 #import "EBPurchaseHelper.h"
@@ -43,16 +42,8 @@
 #pragma mark - 初始化SDK
 - (void)startSDK
 {
-    CXInitConfigure *cfg = [[CXInitConfigure alloc] init];
+    [[CXComPlatformBase defaultPlatform] showLoginViewWithController:self];
     
-    cfg.cpKey = @"123456";
-    cfg.cpId = @"10010";
-    cfg.gameId = @"1";
-//    cfg.serverId = @"2";
-//    cfg.channelId = @"213";
-    cfg.controller = self;
-    [[CXComPlatformBase defaultPlatform] CXInit:cfg];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lgoinSuccessedCallBack:) name:LOGIN_SUCCESSED_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailedCallBack:) name:LOGIN_FAILED_NOTIFICATION object:nil];
 }
@@ -76,12 +67,12 @@
 #pragma mark - 开始支付
 - (void)startPay
 {
-    CXPayParams *params = [[CXPayParams alloc] init];
-    params.good_id = @"1";
-    params.cp_bill_no = @"123456";
-    params.notify_url = @"http://pay.zjszz.173.com/pay!finishOrder.action?aaa=bbb&ccc=ddd";
-    params.extra = @"abc2013-05-24";
-    [[EBPurchaseHelper sharedHelper] setOrdersParams:params];
+    CXPayParams *order = [[CXPayParams alloc] init];
+    order.good_id = @"1";
+    order.cp_bill_no = @"123456";
+    order.notify_url = @"http://14.17.126.90/cunhua_notify/";
+    order.extra = @"abc2013-05-24";
+    [[EBPurchaseHelper sharedHelper] setOrdersParams:order];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessedCallBack:) name:PURCHASE_SUCCESSED_NOTIFICATION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseFailedCallBack:) name:PURCHASE_FAILED_NOTIFICATION object:nil];

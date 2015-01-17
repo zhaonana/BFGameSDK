@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "TalkingDataAppCpa.h"
+#import "CXComPlatformBase.h"
 
 @implementation AppDelegate
 
@@ -19,6 +20,12 @@
     MainViewController *mainCon = [[MainViewController alloc] init];
     self.window.rootViewController = mainCon;
     
+    //初始化SDK
+    [[CXComPlatformBase defaultPlatform] initializeWithCpId:@"10023"
+                                                   andCpKey:@"1021wewg%^d"
+                                                  andGameId:@"71"
+                                                andServerId:@"1"
+                                               andChannelId:@"213"];
     //TD
     [TalkingDataAppCpa init:@"your key" withChannelId:@"your channelId"];
     

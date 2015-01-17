@@ -29,6 +29,6 @@
  *
  *  @param params 支付参数
  */
-- (void)setOrdersParams:(CXPayParams *)params;
+- (void)setOrdersParams:(CXPayParams *)order;
 
 @end
